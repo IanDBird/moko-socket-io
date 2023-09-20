@@ -20,32 +20,12 @@ class Testing {
             println("connect")
         }
 
-        on(SocketEvent.Connecting) {
-            println("connecting")
-        }
-
         on(SocketEvent.Disconnect) {
             println("disconnect")
         }
 
         on(SocketEvent.Error) {
             println("error $it")
-        }
-
-        on(SocketEvent.Reconnect) {
-            println("reconnect")
-        }
-
-        on(SocketEvent.ReconnectAttempt) {
-            println("reconnect attempt $it")
-        }
-
-        on(SocketEvent.Ping) {
-            println("ping")
-        }
-
-        on(SocketEvent.Pong) {
-            println("pong")
         }
 
         listOf(

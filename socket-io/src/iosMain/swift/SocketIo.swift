@@ -14,14 +14,14 @@ public enum SocketIoTransport: Int {
 @objc
 public enum SocketEvent: Int {
   case connect
-  case connecting
   case disconnect
   case error
-  case message
+}
+
+@objc
+public enum SocketManagerEvent: Int {
   case reconnect
   case reconnectAttempt
-  case ping
-  case pong
 }
 
 @objc
@@ -88,33 +88,9 @@ public class SocketIo: NSObject {
     case .error:
       clientEvent = .error
       break
-    case .message:
-      socket.onAny { anyEvent in
-        if let data = anyEvent.items {
-          action(data)
-        } else {
-          action([])
-        }
-      }
-      return
     case .disconnect:
       clientEvent = .disconnect
       break
-    case .reconnect:
-      clientEvent = .reconnect
-    case .reconnectAttempt:
-      clientEvent = .reconnectAttempt
-    case .ping:
-      clientEvent = .ping
-    case .pong:
-      clientEvent = .pong
-    case .connecting:
-      socket.on(clientEvent: .statusChange) { [weak self] data, _ in
-        if self?.socket.status == .connecting {
-          action(data)
-        }
-      }
-      return
     default:
       return
     }

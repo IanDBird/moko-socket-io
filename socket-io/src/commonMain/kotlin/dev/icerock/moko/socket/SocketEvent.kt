@@ -6,12 +6,13 @@ package dev.icerock.moko.socket
 
 expect sealed class SocketEvent<T> {
     object Connect : SocketEvent<Unit>
-    object Connecting : SocketEvent<Unit>
     object Disconnect : SocketEvent<Unit>
     object Error : SocketEvent<Throwable>
-    object Message : SocketEvent<Any>
-    object Reconnect : SocketEvent<Unit>
-    object ReconnectAttempt : SocketEvent<Int>
-    object Ping : SocketEvent<Unit>
-    object Pong : SocketEvent<Unit>
+}
+
+expect sealed class SocketManagerEvent<T> {
+
+    object Reconnect : SocketManagerEvent<Unit>
+
+    object ReconnectAttempt : SocketManagerEvent<Unit>
 }
